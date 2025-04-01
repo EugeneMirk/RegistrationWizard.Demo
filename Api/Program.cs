@@ -3,7 +3,6 @@ using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SQLitePCL;
@@ -14,7 +13,6 @@ Batteries.Init();
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
 builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -84,16 +82,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseStaticFiles();
-
-if (!builder.Environment.IsDevelopment())
-{
-    app.UseForwardedHeaders(new ForwardedHeadersOptions
-    {
-        ForwardedHeaders = ForwardedHeaders.All
-    });
-
-    app.UseSpaStaticFiles();
-}
 
 app.UseCors("AllowFrontend");
 
