@@ -144,7 +144,6 @@ public class UserRepositoryTests : IDisposable
     [Fact]
     public async Task UpdateAsync_ModifiesExistingUser()
     {
-        // Arrange
         var repo = CreateRepository();
         var user = await repo.GetByIdAsync(1);
         user.Email = "updated@test.com";

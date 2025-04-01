@@ -102,7 +102,6 @@ public class AccountServiceTests
 
         var result = await _accountService.RegisterAsync(request);
 
-        // Assert
         result.IsSuccess.Should().BeFalse();
         result.ErrorType.Should().Be(ErrorType.DuplicateEmail);
     }

@@ -48,6 +48,7 @@ public class CountryService : ICountryService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching countries");
+
             throw;
         }
     }
@@ -76,6 +77,7 @@ public class CountryService : ICountryService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching provinces for country {CountryId}", countryId);
+
             throw;
         }
     }

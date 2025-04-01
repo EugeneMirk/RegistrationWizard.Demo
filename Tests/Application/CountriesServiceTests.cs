@@ -86,7 +86,6 @@ public class CountriesServiceTests
     [Fact]
     public async Task GetProvincesByCountryIdAsync_ReturnsProvincesFromCache_WhenCacheExists()
     {
-        // Arrange
         const int countryId = 1;
         var cacheKey = $"ProvincesForCountry_{countryId}";
         var cachedProvinces = new List<ProvinceResponse>
@@ -105,7 +104,6 @@ public class CountriesServiceTests
     [Fact]
     public async Task GetProvincesByCountryIdAsync_FetchesFromRepository_WhenCacheEmpty()
     {
-        // Arrange
         const int countryId = 1;
         var cacheKey = $"ProvincesForCountry_{countryId}";
         var dbProvinces = new List<Province>

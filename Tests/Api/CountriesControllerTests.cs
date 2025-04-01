@@ -1,7 +1,6 @@
 ﻿using Api.Controllers;
 using Core.DTOs.CountryDTOs.Responses;
 using Core.Interfaces.Services;
-using Domain.Entities;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -82,10 +81,8 @@ public class CountriesControllerTests
             .Setup(x => x.GetProvincesByCountryIdAsync(countryId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedProvinces);
 
-        // Act
         var result = await _controller.GetProvincesByCountryId(countryId);
 
-        // Assert
         result.Result.Should().BeOfType<OkObjectResult>()
             .Which.Value.Should().BeEquivalentTo(expectedProvinces);
     }
@@ -93,7 +90,6 @@ public class CountriesControllerTests
     [Fact]
     public async Task GetProvincesByCountryId_Returns404_WhenNoProvincesFound()
     {
-        // Arrange
         const int countryId = 99;
         _countryServiceMock
             .Setup(x => x.GetProvincesByCountryIdAsync(countryId, It.IsAny<CancellationToken>()))

@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data;
 
@@ -18,13 +13,12 @@ public class DefaultDataSetup
         try
         {
             if (await context.Countries.AnyAsync())
-            {              
+            {
                 return;
             }
 
             logger.LogInformation("Seeding database with default data...");
 
-            // Create exactly 2 test countries as per requirements
             var countries = new List<Country>
             {
                 new Country { Name = "Country 1" },
@@ -75,7 +69,6 @@ public class DefaultDataSetup
                     Country = countries[0],
                     Province = countries[0].Provinces.ElementAt(1)
                 },
-                // Additional users...
                 new User
                 {
                     Email = "user3@example.com",
