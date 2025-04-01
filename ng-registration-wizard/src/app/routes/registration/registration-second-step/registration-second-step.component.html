@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="registration-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Country</mat-label>
+    <mat-select 
+      formControlName="country" 
+      (selectionChange)="onCountryChange()" 
+      required
+      [compareWith]="compareById">
+      <mat-option *ngFor="let country of countries()" [value]="country.id">
+        {{ country.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.controls.country.invalid && form.controls.country.touched">
+      Please select a country
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Province/State</mat-label>
+    <mat-select 
+      formControlName="province" 
+      required
+      [disabled]="!form.value.country || isLoading"
+      [compareWith]="compareById">
+      <mat-option *ngFor="let province of provinces()" [value]="province.id">
+        {{ province.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.controls.province.invalid && form.controls.province.touched">
+      Please select a province/state
+    </mat-error>
+  </mat-form-field>
+
+  <div class="actions">
+    <button 
+      mat-stroked-button 
+      type="button" 
+      (click)="goBack()"
+      [disabled]="isLoading">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit"
+      [disabled]="form.invalid || isLoading">
+      <span *ngIf="!isLoading">Complete Registration</span>
+      <span *ngIf="isLoading">Processing...</span>
+      <mat-icon *ngIf="!isLoading">check_circle</mat-icon>
+      <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+    </button>
+  </div>
+</form>

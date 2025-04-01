@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="registration-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" required>
+    <mat-icon matSuffix>email</mat-icon>
+    <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('invalidEmail') && form.get('email')?.touched">
+      Please enter a valid email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" required>
+    <mat-icon matSuffix>lock</mat-icon>
+    <mat-error *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched">
+      Minimum 2 characters required
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('invalidPassword') && form.get('password')?.touched">
+      Must contain at least 1 letter and 1 number
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" formControlName="confirmPassword" required>
+    <mat-icon matSuffix>lock</mat-icon>
+    <mat-error *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.touched">
+      Please confirm your password
+    </mat-error>
+    <mat-error *ngIf="form.hasError('mismatch') && form.get('confirmPassword')?.touched">
+      Passwords do not match
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="agreeTerms" color="primary">
+    I agree to terms
+  </mat-checkbox>
+  <mat-error *ngIf="form.get('agreeTerms')?.invalid && form.get('agreeTerms')?.touched">
+    You must agree to terms
+  </mat-error>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || isLoading">
+      <span *ngIf="!isLoading">Next</span>
+      <span *ngIf="isLoading">Checking...</span>
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</form>

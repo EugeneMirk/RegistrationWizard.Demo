@@ -1,0 +1,16 @@
+<ng-container *ngIf="step() === 1">
+    <app-registration-first-step 
+      (next)="onFirstStepSubmit($event)"
+      [initialData]="firstStepData">
+    </app-registration-first-step>
+  </ng-container>
+  
+  <ng-container *ngIf="step() === 2">
+    <app-registration-second-step 
+      (back)="onBack($event)"
+      (save)="onSave($event)"
+      [initialData]="secondStepData">
+    </app-registration-second-step>
+  </ng-container>
+  
+  <mat-spinner *ngIf="isLoading" diameter="40" class="spinner"></mat-spinner>
